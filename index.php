@@ -10,14 +10,14 @@
     </head>
     <body>
         <div class="teste">
-        <form>
+        <form action="formulario.php" method="POST">
         <div class="form-group">
             <label>Nome</label>
             <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome">
         </div>
         <div class="form-group">
             <label for="exampleInputPassword1">Senha</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+            <input type="password" class="form-control" id="senha" placeholder="Senha" nome="senha">
         </div>
             <button type="submit" class="btn btn-primary">Login</button>
         </form>

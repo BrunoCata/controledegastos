@@ -7,6 +7,33 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body>
+    
+    <?php
+      require_once 'processo.php';
+      
+      $funcionando = $conexao->rowCount();      
+      $conexao = getConnection();
+
+      if($funcionando != 0){  
+        try{
+          $nome = $_POST['nome'];
+          $senha = $_POST['senha'];
+          $conexao = $conexao->prepare("SELECT * FROM login WHERE nome = :nome AND senha = :senha");
+
+          $conexao->bindValue(":nome", $nome);
+          $conexao->bindValue(":senha", $senha);
+
+          $conexao->execute(); 
+
+      } catch(Exception $e){
+          $e->getMessage(); 
+      }
+    } else{
+        header("Location: index.php");
+    }
+         
+    ?>
+  
     <?php require_once 'processo.php'; ?>
 
     <?php
@@ -26,9 +53,6 @@
       $conexao = getConnection();
       $stmt = $conexao->query("SELECT * FROM data;");
       $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        /* $mysqli = new mysqli('localhost', 'mario', 'Bruno100!', 'crud', NULL, NULL) or die(mysqli_error($mysqli));
-        $result = $mysqli->query("SELECT * FROM data") or die($mysqli->error);
-        //pre_r($result )*/;
     ?>
 
     <div class="row justify-content-center">

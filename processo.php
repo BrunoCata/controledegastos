@@ -33,7 +33,7 @@ if(isset($_POST['salvar'])){
     $_SESSION['mensagem'] = "Registro salvo!";
     $_SESSION['msg_type'] = "sucesso";
 
-    header("location: index.php");
+    header("location: formulario.php");
 
     } catch(Exception $e){
         $e->getMessage();  
@@ -53,7 +53,7 @@ if(isset($_GET['deletar'])){
     $_SESSION['mensagem'] = "Registro deletado!";
     $_SESSION['msg_type'] = "danger";
 
-    header("location: index.php");
+    header("location: formulario.php");
     } catch(Exception $e){
         $e->getMessage();
     }
@@ -71,6 +71,8 @@ if(isset($_GET['editar'])){
     $result = $conexao->fetch(PDO::FETCH_ASSOC);
     $name = $result['nome'];
     $localizacao = $result['localizacao'];
+
+    header('formulario.php');
     
     } catch(Exception $e){
         $e->getMessage();
@@ -94,7 +96,7 @@ if(isset($_POST['atualizar'])){
     $_SESSION['mensagem'] = "Registro atualizado";
     $_SESSION['msg_type'] = "warning";
 
-    header('location: index.php');
+    header('location: formulario.php');
     
     } catch(Exception $e){
         $e->getMessage();
