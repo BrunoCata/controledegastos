@@ -1,0 +1,18 @@
+CREATE TABLE pessoa (
+	id_pessoa INT(10) AUTO_INCREMENT PRIMARY KEY,
+	login VARCHAR(250) NOT NULL,
+    senha VARCHAR(250) NOT NULL, 
+    nome VARCHAR(90) NOT NULL,
+	salario VARCHAR(90) NOT NULL
+)ENGINE=MyISAM;
+
+CREATE TABLE gasto (
+    id_gasto INT(10) AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(100) NOT NULL,
+    valor FLOAT(8,2) NOT NULL,
+    data_gasto TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
+    id_pessoa INT(10),
+    FOREIGN KEY (id_pessoa) REFERENCES pessoa(id_pessoa)  
+)ENGINE=MyISAM;
+
+CREATE TABLE pessoa
