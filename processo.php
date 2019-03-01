@@ -1,21 +1,9 @@
 <?php
 
+require_once 'conexao.php';
+
 session_start();
 ini_set( 'display_errors', 0 );
-
-function getConnection(){    
-    $host = "localhost";
-    $banco = "crud";
-    $usuario = "mario";
-    $senha = "Bruno100!";
-        
-    try{
-        $conexao = new PDO("mysql:host=$host;dbname=$banco", $usuario, $senha, NULL);
-        return $conexao;
-    } catch(PDOException $e){
-        return "Ocorreu o seguinte erro:<br>" . $e->getMessage();
-    }
-}
 
 $conexao = getConnection();
 
@@ -24,10 +12,10 @@ if(isset($_POST['salvar'])){
     try{
                    
     $name = $_POST['nome'];
-    $localizacao = $_POST['localizacao'];
-    $parametros = array('name' => $name, 'localizacao' => $localizacao);
+    $salario = $_POST['salario'];
+    $parametros = array('name' => $name, 'salario' => $salario);
 
-    $conexao =  $conexao->prepare("INSERT INTO data (nome, localizacao) VALUES(:name, :localizacao)");
+    $conexao =  $conexao->prepare("INSERT INTO data (nome, salario) VALUES(:name, :salario)");
     $conexao->execute($parametros);
     
     $_SESSION['mensagem'] = "Registro salvo!";
@@ -45,7 +33,7 @@ if(isset($_GET['deletar'])){
     try{
 
     $id = $_GET['deletar'];
-    $parametros = array('name' => $name, 'localizacao' => $localizacao);
+    $parametros = array('name' => $name, 'salario' => $salario);
     
     $conexao = $conexao->prepare("DELETE FROM data WHERE id = $id");
     $conexao->execute($parametros);
@@ -70,7 +58,7 @@ if(isset($_GET['editar'])){
     
     $result = $conexao->fetch(PDO::FETCH_ASSOC);
     $name = $result['nome'];
-    $localizacao = $result['localizacao'];
+    $salario = $result['salario'];
 
     header('formulario.php');
     
@@ -86,10 +74,10 @@ if(isset($_POST['atualizar'])){
 
     $id = $_POST['id'];
     $name = $_POST['nome'];
-    $localizacao = $_POST['localizacao'];
-    $parametros = array('id' => $id, 'name' => $name, 'localizacao' => $localizacao);
+    $salario = $_POST['salario'];
+    $parametros = array('id' => $id, 'name' => $name, 'salario' => $salario);
 
-    $conexao = $conexao->prepare("UPDATE data SET nome = :name, localizacao = :localizacao WHERE id = :id");
+    $conexao = $conexao->prepare("UPDATE data SET nome = :name, salario = :salario WHERE id = :id");
     $conexao->execute($parametros);
     $conexao->fetch(PDO::FETCH_ASSOC);    
 
