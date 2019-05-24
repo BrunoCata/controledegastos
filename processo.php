@@ -2,7 +2,6 @@
 
 require_once 'conexao.php';
 
-session_start();
 ini_set( 'display_errors', 0 );
 
 $conexao = getConnection();
@@ -13,9 +12,9 @@ if(isset($_POST['salvar'])){
                    
     $name = $_POST['nome'];
     $salario = $_POST['salario'];
-    $parametros = array('name' => $name, 'salario' => $salario);
+    $parametros = array('nome' => $nome, 'salario' => $salario);
 
-    $conexao =  $conexao->prepare("INSERT INTO data (nome, salario) VALUES(:name, :salario)");
+    $conexao =  $conexao->prepare("INSERT INTO pessoa (nome, salario) VALUES(:nome, :salario)");
     $conexao->execute($parametros);
     
     $_SESSION['mensagem'] = "Registro salvo!";
@@ -33,9 +32,9 @@ if(isset($_GET['deletar'])){
     try{
 
     $id = $_GET['deletar'];
-    $parametros = array('name' => $name, 'salario' => $salario);
+    $parametros = array('nome' => $nome, 'salario' => $salario);
     
-    $conexao = $conexao->prepare("DELETE FROM data WHERE id = $id");
+    $conexao = $conexao->prepare("DELETE FROM pessoa WHERE id_pessoa = $id_pessoa");
     $conexao->execute($parametros);
 
     $_SESSION['mensagem'] = "Registro deletado!";
@@ -51,9 +50,9 @@ if(isset($_GET['editar'])){
 
     try{
     $id = $_GET['editar'];
-    $parametros = array('id' => $id);
+    $parametros = array('id_pessoa' => $id_pessoa);
     $update = true;
-    $conexao = $conexao->prepare("SELECT * FROM data WHERE id = :id");
+    $conexao = $conexao->prepare("SELECT * FROM pessoa WHERE id_pessoa = :id_pessoa");
     $conexao->execute($parametros);
     
     $result = $conexao->fetch(PDO::FETCH_ASSOC);
@@ -72,12 +71,12 @@ if(isset($_POST['atualizar'])){
 
     try{
 
-    $id = $_POST['id'];
+    $id = $_POST['id_pessoa'];
     $name = $_POST['nome'];
     $salario = $_POST['salario'];
-    $parametros = array('id' => $id, 'name' => $name, 'salario' => $salario);
+    $parametros = array('id_pessoa' => $id_pessoa, 'nome' => $nome, 'salario' => $salario);
 
-    $conexao = $conexao->prepare("UPDATE data SET nome = :name, salario = :salario WHERE id = :id");
+    $conexao = $conexao->prepare("UPDATE pessoa SET nome = :nome, salario = :salario WHERE id_pessoa = :id_pessoa");
     $conexao->execute($parametros);
     $conexao->fetch(PDO::FETCH_ASSOC);    
 

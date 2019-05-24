@@ -1,8 +1,9 @@
 <?php 
 
-require_once 'conexao.php';
+require_once 'classeDatabase.php';
 
-$conexao = getConnection();
+$conexao = new Database();
+$conecta = $conexao->getConnection();
 
     try{               
         $login = $_POST['login'];
@@ -13,6 +14,7 @@ $conexao = getConnection();
 
         $conexao =  $conexao->prepare("INSERT INTO pessoa (login, senha, nome, salario) VALUES(:login, :senha, :nome, :salario)");
         $conexao->execute($parametros);
+        
 
         $_SESSION['mensagem'] = "Usuario cadastrado";
         $_SESSION['msg_type'] = "sucesso";

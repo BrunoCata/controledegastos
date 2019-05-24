@@ -1,10 +1,12 @@
 <?php
 
+session_start();
+
 function getConnection(){    
     $host = "localhost";
     $banco = "controledegastos";
     $usuario = "mario";
-    $senha = "Bruno100!";
+    $senha = "123";
         
     try{
         $conexao = new PDO("mysql:host=$host;dbname=$banco", $usuario, $senha, NULL);
