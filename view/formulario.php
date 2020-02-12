@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   </head>
   <body>
-    <?php require_once 'processoGastos.php'; ?>
+    <?php require_once '/home/mario-ti/mario_dev/controledegastos/model/processoGastos.php'; ?>
    
     <div class="container">     
 
@@ -24,6 +24,7 @@
             <tr>
               <td><?=$_SESSION['usuario']['nome'];?></td>
               <td><?=$_SESSION['usuario']['salario'];?></td>
+              <td><?=$gastos['sum(valor)'];?></td>
             </tr>        
         </table>
 

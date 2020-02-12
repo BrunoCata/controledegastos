@@ -1,6 +1,6 @@
 <?php
   
-  require_once 'classeDatabase.php';
+require_once 'conexao.class.php';
 
       $conexao = new Database();      
       $conecta = $conexao->getConnection();
@@ -28,6 +28,6 @@
       } else{
           session_start();
           $_SESSION['usuario'] = $resultado;
-          header("location: formulario.php");
+          header("location: /view/formulario.php");
       }
 ?>

@@ -1,8 +1,8 @@
 <?php
 
-session_start();
+// session_start();
 
-ini_set( 'display_errors', false );
+// ini_set( 'display_errors', false );
 
 class Database{    
  
@@ -20,16 +20,6 @@ class Database{
         } catch(PDOException $e){
             return "Ocorreu o seguinte erro:<br>" . $e->getMessage();
         }
-    }
-
-    function buscaGastoDaPessoa(){
-    
-        $id_pessoa = $_SESSION['usuario']['id_pessoa'];
-        $conecta = $conecta->prepare("SELECT * FROM gasto WHERE id_pessoa = :id_pessoa");
-        
-        $conecta->bindValue(':id_pessoa', $id_pessoa);
-        $conecta->execute();
-        $gastos = $conecta->fetchAll(PDO::FETCH_ASSOC);  
     }
 }
 

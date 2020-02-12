@@ -1,14 +1,23 @@
 <?php
 
-require_once 'classeDatabase.php';
+require_once 'conexao.class.php';
+//require_once '/view/gastos.php';
 
-ini_set( 'display_errors', 0 );
+ini_set( 'display_errors', 0);
 
 $conexao = new Database();
 $conecta = $conexao->getConnection();
 
-if(isset($_POST['salvar'])){
+$id_pessoa = $_SESSION['usuario']['id_pessoa'];
+$parametros = array('id_pessoa' => $id_pessoa);
 
+$conecta = $conecta->prepare("SELECT sum(valor) FROM gasto WHERE id_pessoa = :id_pessoa");
+
+$conecta->execute($parametros);
+$gastos = $conecta->fetch(PDO::FETCH_ASSOC);
+
+
+if(isset($_POST['salvar'])){
     try{
                    
     $descricao = $_POST['descricao'];

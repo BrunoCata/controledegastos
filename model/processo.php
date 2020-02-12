@@ -1,10 +1,12 @@
 <?php
 
-require_once 'conexao.php';
+require_once 'conexao.class.php';
 
 ini_set( 'display_errors', 0 );
 
-$conexao = getConnection();
+$conecta = new Database();
+$conexao = $conecta->getConnection();
+
 
 if(isset($_POST['salvar'])){
 

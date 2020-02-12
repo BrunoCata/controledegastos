@@ -9,18 +9,18 @@
   <body>
     <div class="container">
       <?php 
-        require_once 'classeDatabase.php';
+        require_once '/home/mario-ti/mario_dev/controledegastos/model/conexao.class.php';
+        require_once '/home/mario-ti/mario_dev/controledegastos/model/processoGastos.php';
         
         $conexao = new Database();
         $conecta = $conexao->getConnection();
     
         $id_pessoa = $_SESSION['usuario']['id_pessoa'];
         $conecta = $conecta->prepare("SELECT * FROM gasto WHERE id_pessoa = :id_pessoa");
-        
         $conecta->bindValue(':id_pessoa', $id_pessoa);
         $conecta->execute();
         $gastos = $conecta->fetchAll(PDO::FETCH_ASSOC);
-      ?>  
+      ?>
     
     <div class="row justify-content-center">
         <table class="table formulario">
@@ -29,7 +29,7 @@
               <th>Descrição</th>
               <th>Valor</th>
               <th>Data</th>
-              <th><a class="text-body" href="formulario.php">Voltar</a></th>
+              <th><a class="text-body" href="/view/formulario.php">Voltar</a></th>
             </tr>
           </thead>
     <?php
@@ -38,7 +38,7 @@
               <td><?php echo $gasto['descricao'];?></td>
               <td><?php echo $gasto['valor'];?></td>
               <td><?php echo $gasto['data_gasto'];?></td>
-              <td><a href="processoGastos.php?deletar=<?=$gasto['id_gasto'];?>" 
+              <td><a href="/model/processoGastos.php?deletar=<?=$gasto['id_gasto'];?>" 
                 class="btn btn-danger">Deletar</a></td>
             </tr>
     <?php endforeach; ?>
